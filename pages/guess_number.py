@@ -6,9 +6,8 @@ import random as r
 # Set the TERM environment variable to 'xterm' (a common terminal type)
 # os.environ['TERM'] = 'xterm'
 
-md = st.text_area("Welcome to the Number Guessing Game!\nI'm thinking of a number between 1 and 100.")
-
-st.markdown(md)
+st.markdown("Welcome to the Number Guessing Game!\
+I'm thinking of a number between 1 and 100.")
 
 # Now you can use the clear function as before
 def clear_console():
