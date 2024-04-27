@@ -10,16 +10,15 @@ def clear_console():
 def difficulty_assignment():
     if "difficulty" not in st.session_state:
         st.session_state.difficulty = "not_set"
-    difficulty = st.selectbox("Choose a difficulty:", ["Not set", "Easy", "Hard"])
+    difficulty = st.selectbox("Choose a difficulty:", ["Not set", "Easy", "Hard"], key="difficulty_select")
     if difficulty.lower() == "hard":
         st.write("You have 5 attempts to guess the number.")
-        return 5
+        st.session_state.max_guesses = 5
     elif difficulty.lower() == "easy":
         st.write("You have 10 attempts to guess the number.")
-        return 10
+        st.session_state.max_guesses = 10
     else:
         st.write("Please choose a difficulty.")
-        return 0
 
 # Function to evaluate the guess
 def check_guesses(user_guess, correct_number):
@@ -37,57 +36,34 @@ def game():
 
     # Initialize winning number and attempts if not already set
     if "winning_number" not in st.session_state:
-        st.session_state.winning_number = 0
+        st.session_state.winning_number = random.randint(1, 100)
 
     if "max_guesses" not in st.session_state:
         st.session_state.max_guesses = 0
 
     st.session_state.max_guesses -= 1
     
-    # Generate a random number if not already generated
-    if st.session_state.winning_number == 0:
-        st.session_state.winning_number = random.randint(1, 100)
-
-    st.write('Pssst, the correct answer is ', st.session_state.winning_number)
-
-    # Determine number of guesses based on difficulty level
-    max_guesses = difficulty_assignment()
-
-    # Handle for invalid response to difficulty level check
-    if max_guesses == 0:
-        st.write("Please try again.")
-        max_guesses = difficulty_assignment()
-        if max_guesses == 0:
-            st.write("Sorry, but you were given two opportunities to provide a valid response, "
-                     "and did not do so either time.\nHave a nice day!")
+    # Get the number of guesses based on difficulty
+    difficulty_assignment()
 
     # Loop to take guesses
-    while max_guesses > 0:
-        with st.empty():
-            make_guess = st.text_input("Make a guess: ", key="guess_input")
-            try:
-                guess = int(make_guess)
-            except ValueError:
-                st.write("Please enter a valid number.")
-                continue
-
+    while st.session_state.max_guesses > 0:
+        make_guess = st.text_input("Make a guess:", key="guess_input")
+        guess = int(make_guess) if make_guess.strip().isdigit() else None
+        if guess is not None:
             you_win = check_guesses(guess, st.session_state.winning_number)
             if you_win:
-                st.write(f"Congratulations! You guessed the number {st.session_state.winning_number}!")
+                st.write("You got it! The answer was", st.session_state.winning_number)
                 break
             else:
-                max_guesses -= 1
-                if max_guesses > 0:
+                st.session_state.max_guesses -= 1
+                if st.session_state.max_guesses > 0:
                     st.write("Guess again.")
-                    if max_guesses > 1:
-                        st.write(f"You have {max_guesses} attempts remaining to guess the number.")
+                    if st.session_state.max_guesses > 1:
+                        st.write("You have", st.session_state.max_guesses, "attempts remaining to guess the number.")
                     else:
                         st.write("You have 1 attempt remaining to guess the number.")
 
-    # Exit gracefully if user runs out of attempts
-    if max_guesses == 0:
-        st.write(f"Sorry, but you've run out of guesses. The winning number was {st.session_state.winning_number}.")
-    st.session_state.winning_number = 0
-
+# Run the game
 if __name__ == "__main__":
     game()
