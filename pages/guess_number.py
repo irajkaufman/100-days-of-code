@@ -98,7 +98,7 @@ def game():
     # st.markdown()
 
 
-if __name__ == "__game__":
+if __name__ == "__main__":
     game()
 
 # Number Guessing Game Objectives:
