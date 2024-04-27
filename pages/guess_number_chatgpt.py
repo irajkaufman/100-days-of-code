@@ -31,8 +31,8 @@ def check_guesses(user_guess, correct_number):
 
 # Main game function
 def game():
-    st.title("Number Guessing Game")
     st.markdown(guess_number_logo)
+    st.markdown("Welcome to the Number Guessing Game!  \nI'm thinking of a number between 1 and 100.")
 
     # Initialize winning number and attempts if not already set
     if "winning_number" not in st.session_state:
