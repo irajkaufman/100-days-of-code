@@ -8,7 +8,9 @@ def clear_console():
 
 # Function to check for difficulty level and return number of attempts
 def difficulty_assignment():
-    difficulty = st.text_input("Choose a difficulty. Type 'easy' or 'hard': ", key="difficulty")
+    if "difficulty" not in st.session_state:
+        st.session_state.difficulty = "not_set"
+    difficulty = st.selectbox("Choose a difficulty:", ["Not set", "Easy", "Hard"])
     if difficulty.lower() == "hard":
         st.write("You have 5 attempts to guess the number.")
         return 5
@@ -16,7 +18,7 @@ def difficulty_assignment():
         st.write("You have 10 attempts to guess the number.")
         return 10
     else:
-        st.write("That was an invalid response.")
+        st.write("Please choose a difficulty.")
         return 0
 
 # Function to evaluate the guess
