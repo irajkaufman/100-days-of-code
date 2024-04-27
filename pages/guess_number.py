@@ -51,8 +51,8 @@ import random as r
 
 def game():
     # beginning housekeeping
-    clear_console()
-    st.markdown(guess_number_logo)
+    # clear_console()
+    st.write(guess_number_logo)
 
     # # establish winning number
     # winning_number = r.randint(1, 100)
