@@ -10,7 +10,8 @@ def clear_console():
 def difficulty_assignment():
     if "difficulty" not in st.session_state:
         st.session_state.difficulty = "not_set"
-    difficulty = st.selectbox("Choose a difficulty:", ["Not set", "Easy", "Hard"], key="difficulty_select")
+    with st.sidebar:
+        difficulty = st.selectbox("Choose a difficulty:", ["Not set", "Easy", "Hard"], key="difficulty_select")
     if difficulty.lower() == "hard":
         st.write("You have 5 attempts to guess the number.")
         st.session_state.max_guesses = 5
