@@ -19,7 +19,7 @@ def difficulty_assignment():
         st.write("You have 10 attempts to guess the number.")
         st.session_state.max_guesses = 10
     else:
-        st.write("Please choose a difficulty.")
+        st.write("Please choose a difficulty (over on the Left Sidebar).")
 
 # Function to evaluate the guess
 def check_guesses(user_guess, correct_number):
