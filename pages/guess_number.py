@@ -59,7 +59,7 @@ def game():
 
     # intro and welcome
     st.markdown("Welcome to the Number Guessing Game!  \nI'm thinking of a number between 1 and 100.")
-    # st.markdown(f"Pssst, the correct answer is {str(winning_number)}")
+    st.write('Pssst, the correct answer is ', winning_number)
 
     # determine number of guesses based on difficulty level chosen in function, above
     max_guesses = difficulty_assignment()
@@ -85,7 +85,7 @@ def game():
         if max_guesses > 0:
             st.markdown("Guess again.")
             if max_guesses > 1:
-                st.markdown(f"You have {max_guesses} attempts remaining to guess the number.")
+                st.write('You have ', max_guesses, ' attempts remaining to guess the number.')
             else:
                 st.markdown("You have 1 attempt remaining to guess the number.")
 
