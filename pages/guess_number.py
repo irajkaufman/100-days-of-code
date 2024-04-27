@@ -53,8 +53,6 @@ def game():
     # beginning housekeeping
     clear_console()
     st.markdown(guess_number_logo)
-    st.markdown("Welcome to the Number Guessing Game!  \nI'm thinking of a number between 1 and 100.")
-
 
     # establish winning number
     winning_number = r.randint(1, 100)
