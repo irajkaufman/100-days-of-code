@@ -33,6 +33,7 @@ def game():
     st.title("Number Guessing Game")
     st.markdown(guess_number_logo)
 
+    # Initialize winning number and attempts if not already set
     if "winning_number" not in st.session_state:
         st.session_state.winning_number = 0
 
@@ -40,7 +41,7 @@ def game():
         st.session_state.max_guesses = 0
 
     st.session_state.max_guesses -= 1
-
+    
     # Generate a random number if not already generated
     if st.session_state.winning_number == 0:
         st.session_state.winning_number = random.randint(1, 100)
@@ -60,25 +61,26 @@ def game():
 
     # Loop to take guesses
     while max_guesses > 0:
-        make_guess = st.text_input("Make a guess: ")
-        try:
-            guess = int(make_guess)
-        except ValueError:
-            st.write("Please enter a valid number.")
-            continue
+        with st.empty():
+            make_guess = st.text_input("Make a guess: ")
+            try:
+                guess = int(make_guess)
+            except ValueError:
+                st.write("Please enter a valid number.")
+                continue
 
-        you_win = check_guesses(guess, st.session_state.winning_number)
-        if you_win:
-            st.write(f"Congratulations! You guessed the number {st.session_state.winning_number}!")
-            break
-        else:
-            max_guesses -= 1
-            if max_guesses > 0:
-                st.write("Guess again.")
-                if max_guesses > 1:
-                    st.write(f"You have {max_guesses} attempts remaining to guess the number.")
-                else:
-                    st.write("You have 1 attempt remaining to guess the number.")
+            you_win = check_guesses(guess, st.session_state.winning_number)
+            if you_win:
+                st.write(f"Congratulations! You guessed the number {st.session_state.winning_number}!")
+                break
+            else:
+                max_guesses -= 1
+                if max_guesses > 0:
+                    st.write("Guess again.")
+                    if max_guesses > 1:
+                        st.write(f"You have {max_guesses} attempts remaining to guess the number.")
+                    else:
+                        st.write("You have 1 attempt remaining to guess the number.")
 
     # Exit gracefully if user runs out of attempts
     if max_guesses == 0:
