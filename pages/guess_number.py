@@ -1,4 +1,4 @@
-from guess_number_art import logo
+from art import guess_number_logo
 import os
 import random as r
 
@@ -41,7 +41,7 @@ def check_guesses(user_guess, correct_number):
 def exit_gracefully(result, correct_number):
     # Call the function to clear the console
     clear_console()
-    print(logo)
+    print(guess_number_logo)
     if result == 0:
         return f"Sorry, but you've run out of guesses.\nThe winning number was {correct_number}.\nThanks for playing!"
     else:
@@ -51,7 +51,7 @@ def exit_gracefully(result, correct_number):
 def game():
     # beginning housekeeping
     clear_console()
-    print(logo)
+    print(guess_number_logo)
 
     # establish winning number
     winning_number = r.randint(1, 100)
