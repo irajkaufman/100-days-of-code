@@ -8,7 +8,7 @@ def clear_console():
 
 # Function to check for difficulty level and return number of attempts
 def difficulty_assignment():
-    difficulty = st.text_input("Choose a difficulty. Type 'easy' or 'hard': ")
+    difficulty = st.text_input("Choose a difficulty. Type 'easy' or 'hard': ", key="difficulty")
     if difficulty.lower() == "hard":
         st.write("You have 5 attempts to guess the number.")
         return 5
@@ -62,7 +62,7 @@ def game():
     # Loop to take guesses
     while max_guesses > 0:
         with st.empty():
-            make_guess = st.text_input("Make a guess: ")
+            make_guess = st.text_input("Make a guess: ", key="guess_input")
             try:
                 guess = int(make_guess)
             except ValueError:
