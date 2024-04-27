@@ -74,7 +74,7 @@ def game():
 
     # loop to take guesses
     while max_guesses > 0:
-        make_guess = int(st.text_input("Make a guess: "))
+        make_guess = st.text_input("Make a guess: ")
         guess = int(make_guess)
         you_win = check_guesses(guess, winning_number)
         if you_win:
