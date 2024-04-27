@@ -52,7 +52,7 @@ import random as r
 def game():
     # beginning housekeeping
     # clear_console()
-    st.write(guess_number_logo)
+    # st.markdown(guess_number_logo)
     st.markdown("Welcome to the Number Guessing Game!  \nI'm thinking of a number between 1 and 100.")
 
 
@@ -98,7 +98,7 @@ def game():
     # st.markdown()
 
 
-if __name__ == "__guess_number__":
+if __name__ == "__game__":
     game()
 
 # Number Guessing Game Objectives:
