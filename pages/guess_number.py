@@ -73,21 +73,21 @@ def game():
             and did not do so either time.  \nHave a nice day!")
 
     # loop to take guesses
-    # while max_guesses > 0:
-    #     make_guess = int(st.text_input("Make a guess: "))
-    #     guess = int(make_guess)
-    #     you_win = check_guesses(guess, winning_number)
-    #     if you_win:
-    #         max_guesses = -1
-    #         break
-    #     else:
-    #         max_guesses -= 1
-    #     if max_guesses > 0:
-    #         st.markdown("Guess again.")
-    #         if max_guesses > 1:
-    #             st.markdown(f"You have {max_guesses} attempts remaining to guess the number.")
-    #         else:
-    #             st.markdown("You have 1 attempt remaining to guess the number.")
+    while max_guesses > 0:
+        make_guess = int(st.text_input("Make a guess: "))
+        guess = int(make_guess)
+        you_win = check_guesses(guess, winning_number)
+        if you_win:
+            max_guesses = -1
+            break
+        else:
+            max_guesses -= 1
+        if max_guesses > 0:
+            st.markdown("Guess again.")
+            if max_guesses > 1:
+                st.markdown(f"You have {max_guesses} attempts remaining to guess the number.")
+            else:
+                st.markdown("You have 1 attempt remaining to guess the number.")
 
     # # exit gracefully
     # ending = exit_gracefully(max_guesses, winning_number)
