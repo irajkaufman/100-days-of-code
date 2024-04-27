@@ -1,5 +1,3 @@
-new version
-
 import streamlit as st
 from art import guess_number_logo
 import random
