@@ -47,9 +47,12 @@ def game():
     # Get the number of guesses based on difficulty
     difficulty_assignment()
 
+    # Dynamic key for text input
+    input_key = "guess_input_" + str(random.randint(0, 10e6))
+
     # Loop to take guesses
     while st.session_state.max_guesses > 0:
-        make_guess = st.text_input("Make a guess:", key="guess_input")
+        make_guess = st.text_input("Make a guess:", key=input_key)
         guess = int(make_guess) if make_guess.strip().isdigit() else None
         if guess is not None:
             you_win = check_guesses(guess, st.session_state.winning_number)
