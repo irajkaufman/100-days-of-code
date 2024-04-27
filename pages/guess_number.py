@@ -48,12 +48,19 @@ def exit_gracefully(result, correct_number):
     else:
         return f"You got it! The answer was {correct_number}.\nGreat job!!"
 
-
 def game():
     # beginning housekeeping
     clear_console()
     st.markdown(guess_number_logo)
 
+    if "winning_number" not in st.session_state:
+    st.session_state.winning_number = 0
+
+    if "max_guesses" not in st.session_state:
+    st.session_state.max_guesses = 0
+
+    st.session_state.max_guesses -= 1
+    
     # establish winning number
     winning_number = r.randint(1, 100)
 
