@@ -17,7 +17,7 @@ def clear_console():
 def difficulty_assignment():
     """Check for difficulty and return number (integer) of attempts based on response.
     10 for easy, 5 for hard, 0 for invalid response."""
-    difficulty = input("Choose a difficulty. Type 'easy' or 'hard': ")
+    difficulty = st.text_input("Choose a difficulty. Type 'easy' or 'hard': ")
     if difficulty.lower() == "hard":
         st.markdown("You have 5 attempts to guess the number.")
         return 5
@@ -74,7 +74,8 @@ def game():
 
     # loop to take guesses
     while max_guesses > 0:
-        guess = int(input("Make a guess: "))
+        make_guess = int(st.text_input("Make a guess: "))
+        guess = int(make_guess)
         you_win = check_guesses(guess, winning_number)
         if you_win:
             max_guesses = -1
