@@ -4,14 +4,16 @@ import os
 import random as r
 
 # Set the TERM environment variable to 'xterm' (a common terminal type)
-os.environ['TERM'] = 'xterm'
+# os.environ['TERM'] = 'xterm'
 
+md = st.text_area("Welcome to the Number Guessing Game!\nI'm thinking of a number between 1 and 100.")
+
+st.markdown(md)
 
 # Now you can use the clear function as before
 def clear_console():
     """Clears the console screen."""
     os.system('clear')
-
 
 # check for difficulty level
 def difficulty_assignment():
@@ -19,7 +21,7 @@ def difficulty_assignment():
     10 for easy, 5 for hard, 0 for invalid response."""
     difficulty = input("Choose a difficulty. Type 'easy' or 'hard': ")
     if difficulty.lower() == "hard":
-        print("You have 5 attempts to guess the number.")
+        st.write("You have 5 attempts to guess the number.")
         return 5
     elif difficulty.lower() == "easy":
         st.write("You have 10 attempts to guess the number.")
