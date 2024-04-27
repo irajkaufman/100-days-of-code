@@ -9,9 +9,9 @@ import random as r
 # st.markdown("Welcome to the Number Guessing Game!  \nI'm thinking of a number between 1 and 100.")
 
 # Now you can use the clear function as before
-# def clear_console():
-#     """Clears the console screen."""
-#     os.system('clear')
+def clear_console():
+    """Clears the console screen."""
+    os.system('clear')
 
 # # check for difficulty level
 # def difficulty_assignment():
