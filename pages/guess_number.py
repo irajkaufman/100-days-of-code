@@ -6,7 +6,7 @@ import random as r
 # Set the TERM environment variable to 'xterm' (a common terminal type)
 # os.environ['TERM'] = 'xterm'
 
-st.markdown("Welcome to the Number Guessing Game!  \nI'm thinking of a number between 1 and 100.")
+# st.markdown("Welcome to the Number Guessing Game!  \nI'm thinking of a number between 1 and 100.")
 
 # Now you can use the clear function as before
 def clear_console():
@@ -19,22 +19,22 @@ def difficulty_assignment():
     10 for easy, 5 for hard, 0 for invalid response."""
     difficulty = input("Choose a difficulty. Type 'easy' or 'hard': ")
     if difficulty.lower() == "hard":
-        st.write("You have 5 attempts to guess the number.")
+        st.markdown("You have 5 attempts to guess the number.")
         return 5
     elif difficulty.lower() == "easy":
-        st.write("You have 10 attempts to guess the number.")
+        st.markdown("You have 10 attempts to guess the number.")
         return 10
     else:
-        st.write("That was an invalid response.")
+        st.markdown("That was an invalid response.")
         return 0
 
 
 # evaluate the guess
 def check_guesses(user_guess, correct_number):
     if user_guess > correct_number:
-        st.write("Too high.")
+        st.markdown("Too high.")
     elif user_guess < correct_number:
-        st.write("Too low.")
+        st.markdown("Too low.")
     elif user_guess == correct_number:
         return True
 
@@ -42,7 +42,7 @@ def check_guesses(user_guess, correct_number):
 def exit_gracefully(result, correct_number):
     # Call the function to clear the console
     clear_console()
-    st.write(guess_number_logo)
+    st.markdown(guess_number_logo)
     if result == 0:
         return f"Sorry, but you've run out of guesses.\nThe winning number was {correct_number}.\nThanks for playing!"
     else:
@@ -52,25 +52,25 @@ def exit_gracefully(result, correct_number):
 def game():
     # beginning housekeeping
     clear_console()
-    st.write(guess_number_logo)
+    st.markdown(guess_number_logo)
 
     # establish winning number
     winning_number = r.randint(1, 100)
 
     # intro and welcome
-    st.write("Welcome to the Number Guessing Game!\nI'm thinking of a number between 1 and 100.")
-    # st.write(f"Pssst, the correct answer is {str(winning_number)}")
+    st.markdown("Welcome to the Number Guessing Game!  \nI'm thinking of a number between 1 and 100.")
+    # st.markdown(f"Pssst, the correct answer is {str(winning_number)}")
 
     # determine number of guesses based on difficulty level chosen in function, above
     max_guesses = difficulty_assignment()
 
     # handle for invalid response to difficulty level check
     if max_guesses == 0:
-        st.write("Please try again.")
+        st.markdown("Please try again.")
         max_guesses = difficulty_assignment()
         if max_guesses == 0:
-            st.write("Sorry, but you were given two opportunities to provide a valid response, \
-            and did not do so either time.\nHave a nice day!")
+            st.markdown("Sorry, but you were given two opportunities to provide a valid response, \
+            and did not do so either time.  \nHave a nice day!")
 
     # loop to take guesses
     while max_guesses > 0:
@@ -82,17 +82,17 @@ def game():
         else:
             max_guesses -= 1
         if max_guesses > 0:
-            st.write("Guess again.")
+            st.markdown("Guess again.")
             if max_guesses > 1:
-                st.write(f"You have {max_guesses} attempts remaining to guess the number.")
+                st.markdown(f"You have {max_guesses} attempts remaining to guess the number.")
             else:
-                st.write("You have 1 attempt remaining to guess the number.")
+                st.markdown("You have 1 attempt remaining to guess the number.")
 
     # exit gracefully
     ending = exit_gracefully(max_guesses, winning_number)
-    st.write(ending)
-    st.write()
-    st.write()
+    st.markdown(ending)
+    st.markdown()
+    st.markdown()
 
 
 if __name__ == "__guess_number__":
