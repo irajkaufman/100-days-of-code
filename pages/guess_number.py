@@ -54,10 +54,10 @@ def game():
     st.markdown(guess_number_logo)
 
     if "winning_number" not in st.session_state:
-    st.session_state.winning_number = 0
+        st.session_state.winning_number = 0
 
     if "max_guesses" not in st.session_state:
-    st.session_state.max_guesses = 0
+        st.session_state.max_guesses = 0
 
     st.session_state.max_guesses -= 1
     
