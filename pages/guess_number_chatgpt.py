@@ -1,34 +1,30 @@
+new version
+
 import streamlit as st
 from art import guess_number_logo
 import random
 
-# Function to clear the console
-def clear_console():
-    st.write("\n" * 100)
-
 # Function to check for difficulty level and return number of attempts
 def difficulty_assignment():
-    if "difficulty" not in st.session_state:
-        st.session_state.difficulty = "not_set"
-    with st.sidebar:
-        difficulty = st.selectbox("Choose a difficulty:", ["Not set", "Easy", "Hard"], key="difficulty_select")
+    difficulty = st.selectbox("Choose a difficulty:", ["Not set", "Easy", "Hard"])
     if difficulty.lower() == "hard":
         st.write("You have 5 attempts to guess the number.")
-        st.session_state.max_guesses = 5
+        return 5
     elif difficulty.lower() == "easy":
         st.write("You have 10 attempts to guess the number.")
-        st.session_state.max_guesses = 10
+        return 10
     else:
-        st.write("Please choose a difficulty (over on the Left Sidebar).")
+        st.write("Please choose a difficulty.")
+        return 0
 
 # Function to evaluate the guess
 def check_guesses(user_guess, correct_number):
     if user_guess > correct_number:
-        st.write("Too high.")
+        return "Too high."
     elif user_guess < correct_number:
-        st.write("Too low.")
+        return "Too low."
     else:
-        return True
+        return "You got it!"
 
 # Main game function
 def game():
@@ -45,28 +41,29 @@ def game():
     st.session_state.max_guesses -= 1
     
     # Get the number of guesses based on difficulty
-    difficulty_assignment()
-
-    # Dynamic key for text input
-    input_key = "guess_input_" + str(random.randint(0, 10e6))
+    max_guesses = difficulty_assignment()
 
     # Loop to take guesses
-    while st.session_state.max_guesses > 0:
-        make_guess = st.text_input("Make a guess:", key=input_key)
-        guess = int(make_guess) if make_guess.strip().isdigit() else None
-        if guess is not None:
-            you_win = check_guesses(guess, st.session_state.winning_number)
-            if you_win:
-                st.write("You got it! The answer was", st.session_state.winning_number)
-                break
-            else:
-                st.session_state.max_guesses -= 1
-                if st.session_state.max_guesses > 0:
-                    st.write("Guess again.")
-                    if st.session_state.max_guesses > 1:
-                        st.write("You have", st.session_state.max_guesses, "attempts remaining to guess the number.")
-                    else:
-                        st.write("You have 1 attempt remaining to guess the number.")
+    while max_guesses > 0:
+        chat_input = st.text_area("Chat:", value="Type your guess here...", height=100)
+        if st.button("Send"):
+            try:
+                guess = int(chat_input.strip())
+                feedback = check_guesses(guess, st.session_state.winning_number)
+                st.write(feedback)
+                if feedback == "You got it!":
+                    st.write("The answer was", st.session_state.winning_number)
+                    break
+                else:
+                    max_guesses -= 1
+                    if max_guesses > 0:
+                        st.write("Guess again.")
+                        if max_guesses > 1:
+                            st.write("You have", max_guesses, "attempts remaining to guess the number.")
+                        else:
+                            st.write("You have 1 attempt remaining to guess the number.")
+            except ValueError:
+                st.write("Please enter a valid number.")
 
 # Run the game
 if __name__ == "__main__":
