@@ -43,6 +43,7 @@ def game():
 
     # Loop to take guesses
     while max_guesses > 0:
+        st.write("max_guesses: ", max_guesses)
         chat_input = st.text_area("Chat:", value="Type your guess here...", height=100)
         if st.button("Send"):
             try:
